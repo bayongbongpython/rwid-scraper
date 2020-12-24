@@ -1,2 +1,4 @@
-# rwid-scraper
-kode dari Mastering Scrapy  Intermediate Scraping with BeautifulSoup  Batch 05.mp4
+Login to Page
+Collect urls from each page
+Getting all product urls
+Merging json result and create CSV/XLSX
