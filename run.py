@@ -44,7 +44,7 @@ def get_detail(url):
     price = soup.find('h4', attrs={'class': 'card-price'}).text.strip()
     stock = soup.find('span', attrs={'class': 'card-stock'}).text.strip().replace('stock:', '')
     category = soup.find('span', attrs={'class': 'card-category'}).text.strip().replace('category:', '')
-    description = soup.find('p', attrs={'class': 'card-text'}).text.strip()
+    description = soup.find('p', attrs={'class': 'card-text'}).text.strip().replace('description:', '')
 
     dict_data = {
         'title': title,
