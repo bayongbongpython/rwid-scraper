@@ -1,9 +1,10 @@
 import json
 import requests
 from bs4 import BeautifulSoup
-from requests import Session
+# from requests import Session
 
 session = requests.Session()
+
 
 def login():
     print('login...')
@@ -17,6 +18,7 @@ def login():
     page_item = soup.find_all('li', attrs={'class': 'page-item'})
     total_pages = len(page_item) - 2
     return total_pages
+
 
 def get_urls(page):
     print('getting urls... page {}'.format(page))
@@ -32,6 +34,7 @@ def get_urls(page):
         urls.append(url)
     return urls
 
+
 def get_detail():
     print('getting detail...')
     # res = session.get(url)
@@ -43,19 +46,24 @@ def get_detail():
 def create_csv():
     print('csv generated...')
 
+
 def run():
     total_pages = login()
+
     total_urls = []
     for i in range(total_pages):
-       page = i + 1
-       urls = get_urls(page)
-       total_urls += urls   #total_urls = total_urls + urls
+        page = i + 1
+        urls = get_urls(page)
+        total_urls += urls  # total_urls = total_urls + urls
 
     with open('all_urls.json', 'w') as outfile:
-       json.dump(total_urls, outfile)
+        json.dump(total_urls, outfile)
+
 
     get_detail()
+
     create_csv()
+
 
 if __name__ == '__main__':
     run()
