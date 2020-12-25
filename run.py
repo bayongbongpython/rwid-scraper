@@ -13,14 +13,10 @@ def login():
     }
 
     res = session.post('http://127.0.0.1:5000/login', data=datas)
-
     soup = BeautifulSoup(res.text, 'html.parser')
-
     page_item = soup.find_all('li', attrs={'class': 'page-item'})
     total_pages = len(page_item) - 2
-
     return total_pages
-
 
 def get_urls(page):
     print('getting urls... page {}'.format(page))
@@ -28,20 +24,13 @@ def get_urls(page):
         'page': page
     }
     res = session.get('http://127.0.0.1:5000', params=params)
-
     soup = BeautifulSoup(res.text, 'html.parser')
-
-    # soup = BeautifulSoup(open('./res.html'), 'html.parser')
-
     titles = soup.find_all('h4', attrs={'class': 'card-title'})
     urls = []
     for title in titles:
         url = title.find('a')['href']
         urls.append(url)
-
-    #print(urls)
     return urls
-
 
 def get_detail():
     print('getting detail...')
@@ -60,17 +49,10 @@ def run():
     for i in range(total_pages):
        page = i + 1
        urls = get_urls(page)
-       total_urls += urls      #total_urls = total_urls + urls
+       total_urls += urls   #total_urls = total_urls + urls
 
     with open('all_urls.json', 'w') as outfile:
        json.dump(total_urls, outfile)
-
-    # with open('all_urls.json') as json_file:
-    #     data = json.load(json_file)
-    # print(data)
-
-    # print(total_urls)
-    # (len(total_urls))
 
     get_detail()
     create_csv()
